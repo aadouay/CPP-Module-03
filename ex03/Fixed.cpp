@@ -84,12 +84,18 @@ Fixed   Fixed::operator++(){
 
 Fixed Fixed::operator*(const Fixed& other)const{
     Fixed result;
-    
-    result.setRawBits((_value * other.getRawBits()) >> _fractionalBits);
+
+    result.setRawBits((_value * other.getRawBits()) / (1 <<_fractionalBits));
     return result;
 }
 
-// int Fixed
+const Fixed&    Fixed::max(const Fixed& a, const Fixed& b){
+    if(a._value > b._value)
+        return (a);
+    else
+        return (b);
+}
+
 Fixed::~Fixed() {
     std::cout << "Destructor called" << std::endl;
 }

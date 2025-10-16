@@ -29,7 +29,8 @@ class Fixed{
         bool operator!=(const Fixed& other);
         Fixed operator++(int);
         Fixed operator++();
-        Fixed operator*(const Fixed& other) const;
+        Fixed operator*(const Fixed& other)const;
+        static const Fixed&    max(const Fixed& a, const Fixed& b);
 };
 
 std::ostream& operator<<(std::ostream& os, const Fixed& other);

@@ -81,13 +81,36 @@ Fixed   Fixed::operator++(){
     _value++;
     return *this;
 }
+Fixed   Fixed::operator--(int){
+    Fixed temp = *this;
+    _value--;
+    return temp;
+}
+
+Fixed   Fixed::operator--(){
+    _value--;
+    return *this;
+}
 
 Fixed Fixed::operator*(const Fixed& other)const{
-    Fixed result;
 
-    result.setRawBits((_value * other.getRawBits()) / (1 <<_fractionalBits));
-    return result;
+    return Fixed(this->toFloat() * other.toFloat());
 }
+
+Fixed Fixed::operator+(const Fixed& other)const{
+
+    return Fixed(this->toFloat() + other.toFloat());
+}
+
+Fixed Fixed::operator-(const Fixed& other)const{
+    return Fixed(this->toFloat() - other.toFloat());
+}
+
+Fixed Fixed::operator/(const Fixed& other)const{
+
+    return Fixed(this->toFloat() / other.toFloat());
+}
+
 
 const Fixed&    Fixed::max(const Fixed& a, const Fixed& b){
     if(a._value > b._value)
@@ -95,6 +118,28 @@ const Fixed&    Fixed::max(const Fixed& a, const Fixed& b){
     else
         return (b);
 }
+
+Fixed&    Fixed::max(Fixed& a, Fixed& b){
+    if(a._value > b._value)
+        return (a);
+    else
+        return (b);
+}
+
+const Fixed&    Fixed::min(const Fixed& a, const Fixed& b){
+    if(a._value < b._value)
+        return (a);
+    else
+        return (b);
+}
+
+Fixed&    Fixed::min(Fixed& a, Fixed& b){
+    if(a._value < b._value)
+        return (a);
+    else
+        return (b);
+}
+
 
 Fixed::~Fixed() {
     std::cout << "Destructor called" << std::endl;
